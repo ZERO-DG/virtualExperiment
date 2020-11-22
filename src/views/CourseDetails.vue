@@ -93,6 +93,16 @@
             <i class="el-icon-s-marketing"></i>实验统计
           </span>
         </el-tab-pane>
+        <el-tab-pane label="分数查看">
+          <span slot="label" @click="scoreView">
+            <i class="el-icon-s-marketing"></i>分数查看
+          </span>
+        </el-tab-pane>
+        <el-tab-pane label="（老师）成绩">
+          <span slot="label">
+            <i class="el-icon-s-marketing"></i>（老师）成绩汇总
+          </span>
+        </el-tab-pane>
       </el-tabs>
     </el-container>
   </div>
@@ -123,6 +133,19 @@ export default {
   },
   components: {},
   methods: {
+    //跳转到分数查看页面
+    scoreView() {
+      // 查询个人的试验记录 /EXPERIENCES/USEROPERATE/getUserFinishExperienceList
+      //post请求 实验experience_userid  experience_id
+      this.$router.push({
+        path: "",
+        name: "VistMap", // 要跳转的路径的 name,可在 router 文件夹下的 index.js 文件内找
+        query: {},
+      });
+
+      // 查询所有的试验记录 /EXPERIENCES/USEROPERATE/ExperienceDoneUserInfo/+exeid
+      // 查询成绩步骤分数 /EXPERIENCES/USEROPERATE/getRecordByRecordId/610812d9cb7b430a8689ed53f301b910
+    },
     //地图页跳转
     toMap(val) {
       this.$router.push({

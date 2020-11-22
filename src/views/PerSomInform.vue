@@ -299,6 +299,7 @@ export default {
               user_intro: this.modiForm.user_intro,
             })
             .then((res) => {
+              console.log(res.data);
               if (res.data.status == 0) {
                 this.$message.success("修改成功");
                 //登录信息修改
@@ -314,7 +315,6 @@ export default {
               } else {
                 this.$message.error("修改失败，请联系管理员...");
               }
-              // console.log(res.data);
             });
         } else {
           this.$message.error("表单填写有误！");

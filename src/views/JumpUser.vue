@@ -73,7 +73,7 @@ export default {
           // token = token.replace(/\}"/g, "}");
           // token = JSON.parse(token);
 
-          console.log(res.data);
+          console.log(res);
 
           if (res.data.status == 0) {
             this.$message.success("用户更新成功，欢迎访问");
@@ -125,7 +125,7 @@ export default {
       console.log(this.userInfoAsync);
 
       this.axios
-        .post("/api/USER/USEROPERATE/UpdateUserInfo", this.userInfoAsync)
+        .post("/api/USER/UpdateUserInfo", this.userInfoAsync)
         .then((res) => {
           //完成对接
           console.log(res);
