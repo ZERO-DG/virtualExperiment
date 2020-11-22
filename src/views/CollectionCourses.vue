@@ -36,16 +36,16 @@ export default {
     };
   },
   mounted() {
-    //转化用户信息
-    this.userInfo = this.$store.state.token;
-    this.userInfo.user_birthday =
-      this.userInfo.user_birthday == null
-        ? null
-        : new Date(this.userInfo.user_birthday);
-    this.userInfo.user_province = this.checkChange(this.userInfo.user_province);
-    this.userInfo.user_school = this.checkChange(this.userInfo.user_school);
-    this.userInfo.user_industry = this.checkChange(this.userInfo.user_industry);
-    console.log(this.userInfo);
+    // //转化用户信息
+    // this.userInfo = this.$store.state.token;
+    // this.userInfo.user_birthday =
+    //   this.userInfo.user_birthday == null
+    //     ? null
+    //     : new Date(this.userInfo.user_birthday);
+    // this.userInfo.user_province = this.checkChange(this.userInfo.user_province);
+    // this.userInfo.user_school = this.checkChange(this.userInfo.user_school);
+    // this.userInfo.user_industry = this.checkChange(this.userInfo.user_industry);
+    // console.log(this.userInfo);
   },
   methods: {
     //判断是否为空，不为空转换为数字
@@ -56,16 +56,11 @@ export default {
     exper() {
       this.axios
         .get(
-          "/api/EXPERIENCES/USEROPERATE/StartExperienceTwo/" +
-            this.userInfo.user_id +
-            "/" +
-            "e7f795f0850541e896d8a510e81d7465"
+          "/api/EXPERIENCES/USEROPERATE/ExperienceDoneUserInfo/" +
+            "e7f795f0850541e896d8a510e81d74"
         )
         .then((res) => {
-          if (res.data.status == 0) {
-            this.experienceInfo = res.data.message;
-            console.log(res.data.message);
-          }
+          console.log(res);
         });
     },
   },

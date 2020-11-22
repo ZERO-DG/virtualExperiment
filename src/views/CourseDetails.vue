@@ -133,11 +133,12 @@ export default {
     },
     //进入虚拟实验页面
     experimentalize() {
+      let exeId = this.obj.experience_id ? this.obj.experience_id : "/login";
       this.$router.push({
         path: "",
         name: "Experiment",
         query: {
-          experience: this.obj.experience_id,
+          experience: exeId,
           lab: window.btoa(this.obj.experience_lab),
         },
       });

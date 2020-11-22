@@ -74,11 +74,13 @@
                   <i slot="prefix" class="el-icon-lock"></i>
                 </el-input>
               </el-form-item>
+
               <el-form-item label="选择省份" prop="user_province">
                 <el-select
                   v-model="modiForm.user_province"
                   filterable
                   placeholder="请选择省份"
+                  @change="clearSchool"
                 >
                   <el-option
                     v-for="item in province_data"
@@ -93,7 +95,7 @@
                 <el-select
                   v-model="modiForm.user_school"
                   filterable
-                  placeholder="请先选择省份"
+                  placeholder="请先选择学校"
                 >
                   <el-option
                     v-for="item in school_data"
@@ -269,6 +271,10 @@ export default {
     this.modiForm.user_industry = this.checkChange(this.modiForm.user_industry);
   },
   methods: {
+    //改变省份清空学校
+    clearSchool() {
+      this.modiForm.user_school = null;
+    },
     //判断是否为空，不为空转换为数字
     checkChange(val) {
       return val == null ? null : val - 0;

@@ -339,6 +339,21 @@ export default {
     },
     sendCode() {
       this.$message.info("已发送...");
+      //1.时间开始倒数
+      //2.按钮进入禁用状态
+      //3.如果倒计时结束 按钮恢复可用状态 按钮文字变成重新发送
+      //4.倒计时的过程中 按钮文字为 多少s后重新发送
+      let timer = setInterval(() => {
+        this.time--;
+        this.btnText = `${this.time}s后重新发送`;
+        this.disabled = true;
+        if (this.time === 0) {
+          this.disabled = false;
+          this.btnText = "重新发送";
+          this.time = 60;
+          clearInterval(timer);
+        }
+      }, 1000);
       //1.邮箱必须正确，不正确则提示
       this.$refs.registerForm.validateField("user_email", (errorMessage) => {
         if (errorMessage) {
@@ -362,21 +377,6 @@ export default {
                 this.$message.success("发送成功！");
                 //验证码发送成功，可以注册
                 this.regInfo = false;
-                //1.时间开始倒数
-                //2.按钮进入禁用状态
-                //3.如果倒计时结束 按钮恢复可用状态 按钮文字变成重新发送
-                //4.倒计时的过程中 按钮文字为 多少s后重新发送
-                let timer = setInterval(() => {
-                  this.time--;
-                  this.btnText = `${this.time}s后重新发送`;
-                  this.disabled = true;
-                  if (this.time === 0) {
-                    this.disabled = false;
-                    this.btnText = "重新发送";
-                    this.time = 60;
-                    clearInterval(timer);
-                  }
-                }, 1000);
               }
             });
         }

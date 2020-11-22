@@ -50,7 +50,7 @@ export default {
     //查找实验
     searchExper(val) {
       this.axios
-        .get("/api/EXPERIENCES/GetExperienceMohu/" + val)
+        .get("/api/EXPERIENCES/USEROPERATE/GetExperienceMohu/" + val)
         .then((res) => {
           console.log(res, res.data.message.length);
           //搜索结果展示

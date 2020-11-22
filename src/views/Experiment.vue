@@ -7,7 +7,7 @@
       height="650"
       class="expIframe"
       allowfullscreen="true"
-      src="http://192.168.1.109:8080/webGL/"
+      :src="webLabUrl"
       style="border: 1px solid gray"
     ></iframe>
     <el-button
@@ -30,7 +30,7 @@ export default {
     };
   },
   created() {
-    // console.log(window.atob(this.$route.query.lab));
+    console.log(window.atob(this.$route.query.lab));
     // this.webLabUrl = window.atob(this.$route.query.lab);
 
     //开始实验
@@ -76,7 +76,7 @@ export default {
       this.$router.push({
         path: "/ExperReport",
         name: "ExperReport",
-        query: { experId: this.eid },
+        query: { recordId: this.eid, experId: this.$route.query.experience },
       });
     },
     //获取开始实验，告知后端开始实验，返回一条开始实验的id，变为同步请求
