@@ -94,6 +94,27 @@ const routes = [{
         import("../views/ExperReport.vue"),
     meta: { requiresAuth: true, title: '上传报告' }
 },
+{
+    path: '/personExperRecord',
+    name: 'personExperRecord',
+    component: () =>
+        import("../views/personExperRecord.vue"),
+    meta: { requiresAuth: true, title: '个人实验记录' }
+},
+{
+    path: '/allExperRecord',
+    name: 'allExperRecord',
+    component: () =>
+        import("../views/allExperRecord.vue"),
+    meta: { requiresAuth: true, title: '实验统计' }
+},
+{
+    path: '/ScoreView',
+    name: 'ScoreView',
+    component: () =>
+        import("../views/ScoreView.vue"),
+    meta: { requiresAuth: true, title: '详细分数查看' }
+},
 ]
 
 const router = new VueRouter({

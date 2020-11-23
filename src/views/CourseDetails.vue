@@ -135,16 +135,13 @@ export default {
   methods: {
     //跳转到分数查看页面
     scoreView() {
-      // 查询个人的试验记录 /EXPERIENCES/USEROPERATE/getUserFinishExperienceList
-      //post请求 实验experience_userid  experience_id
       this.$router.push({
-        path: "",
-        name: "VistMap", // 要跳转的路径的 name,可在 router 文件夹下的 index.js 文件内找
-        query: {},
+        path: "/personExperRecord",
+        name: "personExperRecord", // 要跳转的路径的 name,可在 router 文件夹下的 index.js 文件内找
+        query: { expeId: this.obj.experience_id },
       });
 
       // 查询所有的试验记录 /EXPERIENCES/USEROPERATE/ExperienceDoneUserInfo/+exeid
-      // 查询成绩步骤分数 /EXPERIENCES/USEROPERATE/getRecordByRecordId/610812d9cb7b430a8689ed53f301b910
     },
     //地图页跳转
     toMap(val) {
