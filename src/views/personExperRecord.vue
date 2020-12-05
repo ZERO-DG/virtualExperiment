@@ -2,6 +2,7 @@
   <div class="main-content">
     <h1 v-show="exeDo">你还未做过实验</h1>
     <div v-show="!exeDo">
+      <h2>{{ userName }}</h2>
       <el-table
         :data="perExperList"
         stripe
@@ -48,6 +49,7 @@ export default {
     return {
       perExperList: [], //实验列表list
       exeDo: true, //提示消息
+      userName: "", //用户姓名
     };
   },
   methods: {
@@ -70,7 +72,7 @@ export default {
             eid
         )
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           let ary = res.data.message;
           if (res.data.status == 0) {
             if (ary.length == 0) {
@@ -85,12 +87,25 @@ export default {
           }
         });
     },
+    //查看是否有uid传递
+    checkUid() {
+      if (
+        this.$route.query.uid === undefined ||
+        this.$route.query.uid === null ||
+        this.$route.query.uid == ""
+      ) {
+        return this.$store.state.token.user_id;
+      }
+      return this.$route.query.uid;
+    },
   },
   created() {
     // console.log(this.$store.state.token.user_id);
     // console.log(this.$route.query.expeId);
-    let uid = this.$store.state.token.user_id; //如果带参数是老师查看，不带是个人查看
+    let uid = this.checkUid();
+    //如果带参数是老师查看，不带是个人查看
     this.getPerRecord(uid, this.$route.query.expeId);
+    this.userName = this.$route.query.name;
   },
   mounted() {},
 };

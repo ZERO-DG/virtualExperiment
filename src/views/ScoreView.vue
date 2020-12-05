@@ -72,14 +72,13 @@ export default {
       this.axios
         .get("/api/EXPERIENCES/USEROPERATE/getRecordByRecordId/" + val)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           let ary = res.data.message;
           if (res.data.status == 0) {
             if (ary.length == 0) {
               this.$message.error("没有完成实验或中途退出了实验！");
               this.expeCom = true;
             } else {
-              console.log(ary);
               this.experScore = ary[0].experience_record_result; //实验总分
               this.topicList = ary[0].steps;
               this.expeCom = false;

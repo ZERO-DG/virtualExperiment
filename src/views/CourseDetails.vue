@@ -33,11 +33,9 @@
           <p v-html="obj.experience_introduction" style="margin-left: 10px"></p>
         </el-tab-pane>
         <el-tab-pane label="开始实验">
-          <span slot="label"> <i class="el-icon-s-platform"></i>开始实验 </span>
-
-          <el-button style="margin:50px;" primary @click="experimentalize()">
-            点击开始实验
-          </el-button>
+          <span slot="label" @click="experimentalize()">
+            <i class="el-icon-s-platform"></i>开始实验
+          </span>
         </el-tab-pane>
         <el-tab-pane label="实验要求">
           <span slot="label"> <i class="el-icon-s-claim"></i>实验要求 </span>
@@ -98,9 +96,9 @@
             <i class="el-icon-s-marketing"></i>分数查看
           </span>
         </el-tab-pane>
-        <el-tab-pane label="（老师）成绩">
-          <span slot="label">
-            <i class="el-icon-s-marketing"></i>（老师）成绩汇总
+        <el-tab-pane v-show="identity" label="（老师）成绩">
+          <span slot="label" @click="allScoreView">
+            <i class="el-icon-s-marketing"></i>成绩汇总
           </span>
         </el-tab-pane>
       </el-tabs>
@@ -115,7 +113,11 @@ export default {
       obj: {}, //整个实验对象
       tabPosition: "left",
       textarea: "", //输入框
+      identity: false, //是否是老师，老师true，学生false
     };
+  },
+  created() {
+    this.identity = this.checkedIden();
   },
   mounted() {
     // console.log(this.$route.query.experId);
@@ -133,6 +135,21 @@ export default {
   },
   components: {},
   methods: {
+    checkedIden() {
+      if (this.$store.state.token.user_identity == 1) {
+        return false;
+      } else if (this.$store.state.token.user_identity == 2) {
+        return true;
+      }
+    },
+    //跳转至总查询页面
+    allScoreView() {
+      this.$router.push({
+        path: "/allExperRecord",
+        name: "allExperRecord", // 要跳转的路径的 name,可在 router 文件夹下的 index.js 文件内找
+        query: { expeId: this.obj.experience_id },
+      });
+    },
     //跳转到分数查看页面
     scoreView() {
       this.$router.push({
@@ -140,8 +157,6 @@ export default {
         name: "personExperRecord", // 要跳转的路径的 name,可在 router 文件夹下的 index.js 文件内找
         query: { expeId: this.obj.experience_id },
       });
-
-      // 查询所有的试验记录 /EXPERIENCES/USEROPERATE/ExperienceDoneUserInfo/+exeid
     },
     //地图页跳转
     toMap(val) {
@@ -153,6 +168,7 @@ export default {
     },
     //进入虚拟实验页面
     experimentalize() {
+      //这里有个小bug，展示实验如果有点毛病就网页iframe嵌套
       let exeId = this.obj.experience_id ? this.obj.experience_id : "/login";
       this.$router.push({
         path: "",

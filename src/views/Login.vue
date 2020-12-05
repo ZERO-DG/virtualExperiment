@@ -279,7 +279,7 @@ export default {
             data: Qs.stringify(this.loginRuleForm),
             withCredentials: false, //不携带cookie
           }).then((res) => {
-            console.log(res);
+            // console.log(res);
             // console.log(res.config.data, res.data);
             if (res.data.status == 0) {
               this.$message({
