@@ -1,24 +1,15 @@
 # virtualexperimenttraining
 
-## Project setup
-```
-npm install
-```
+## 下载工程
 
-### Compiles and hot-reloads for development
-```
+git clone 上面的项目地址
+
+## 工程启动命令
+
 npm run serve
-```
 
-### Compiles and minifies for production
-```
+## 工程打包
+
 npm run build
-```
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+> 打包后的文件在 dist 目录下
