@@ -110,7 +110,7 @@ export default {
         });
     },
     //更新手机号
-    updateInfo() {
+    /* updateInfo() {
       this.$refs.userInfoAsync.validate((valid) => {
         if (valid) {
           this.$message.info("提交更新...");
@@ -119,9 +119,9 @@ export default {
           this.$message.error("请输入正确的手机号!");
         }
       });
-    },
+    }, */
     //同步用户信息
-    synchronizeUsers() {
+    /*    synchronizeUsers() {
       console.log(this.userInfoAsync);
 
       this.axios
@@ -185,7 +185,7 @@ export default {
             this.$message.error("未知错误！");
           }
         });
-    },
+    }, */
   },
 };
 </script>

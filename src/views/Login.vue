@@ -1,15 +1,8 @@
 <template>
   <div class="main-content">
     <el-container style="margin-top: 100px">
-      <el-aside width="350px">
-        <!-- <el-card>
-          <el-image :src="imgSrc" class="aside-img">
-            <div slot="error" class="image-slot">
-              <i class="el-icon-picture-outline"></i>
-            </div>
-          </el-image>
-        </el-card> -->
-      </el-aside>
+      <h1 style="color:white;">请从ilab实验平台跳转过来访问</h1>
+      <!-- <el-aside width="350px"> </el-aside>
       <el-main>
         <el-tabs v-model="activeName" class="main_login">
           <el-tab-pane label="用户登录" name="first">
@@ -90,16 +83,6 @@
                   <i slot="prefix" class="el-icon-lock"></i>
                 </el-input>
               </el-form-item>
-              <!-- 用户的身份？？ -->
-              <!-- <el-form-item label="用户身份" prop="user_identity">
-                <el-input
-                  type="email"
-                  v-model="registerForm.user_identity"
-                  placeholder="？？？？"
-                >
-                  <i slot="prefix" class="el-icon-user-solid"></i>
-                </el-input>
-              </el-form-item> -->
               <el-form-item label="性别">
                 <el-radio-group
                   v-model="registerForm.user_gender"
@@ -118,7 +101,6 @@
                   <i slot="prefix" class="el-icon-user-solid"></i>
                 </el-input>
               </el-form-item>
-              <!-- 验证码 -->
               <el-form-item prop="verifyCode">
                 <el-row :gutter="18">
                   <el-col :span="12">
@@ -161,7 +143,7 @@
           </el-tab-pane>
         </el-tabs>
       </el-main>
-      <el-aside width="350px"> </el-aside>
+      <el-aside width="350px"> </el-aside> -->
     </el-container>
   </div>
 </template>

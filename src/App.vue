@@ -36,13 +36,13 @@
             </el-input>
           </el-menu-item>
           <!-- 登录 -->
-          <el-menu-item
+          <!-- <el-menu-item
             index="/Login"
             v-show="!loginState"
             style="float: right; right: 2%"
           >
             登录/注册
-          </el-menu-item>
+          </el-menu-item> -->
           <!-- 登录后的显示 -->
           <el-menu-item
             v-show="loginState"
@@ -53,13 +53,13 @@
             </el-button>
           </el-menu-item>
 
-          <el-menu-item
+          <!-- <el-menu-item
             index="PerSomInform"
             v-show="loginState"
             style="float:right;"
           >
             {{ userName }}
-          </el-menu-item>
+          </el-menu-item> -->
           <el-menu-item
             index="/CollectionCourses"
             v-show="loginState"
