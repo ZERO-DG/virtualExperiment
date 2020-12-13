@@ -1,7 +1,7 @@
 <template>
   <div class="main-content">
     <h1>token后台解析</h1>
-    <el-form
+    <!-- <el-form
       v-show="updateState"
       :model="userInfoAsync"
       :rules="phoneRlues"
@@ -21,7 +21,7 @@
       <el-button @click="updateInfo" type="primary" style="width: 100%">
         更新
       </el-button>
-    </el-form>
+    </el-form> -->
   </div>
 </template>
 <script>
@@ -56,8 +56,41 @@ export default {
     this.sendToken(this.$route);
   },
   methods: {
-    //token后台解析
     sendToken(val) {
+      // console.log(val);
+      this.axios
+        .get(
+          "/api/DoExp/" +
+            val.params.pathMatch +
+            "?token=" +
+            encodeURIComponent(val.query.token),
+          { withCredentials: false }
+        )
+        .then((res) => {
+          // console.log(res);
+          if (res.data.status == 0 || res.data.status == 2) {
+            this.$message.success("用户更新成功，欢迎访问");
+            //登录信息修改
+            if (res.data.message.user_gender == "male") {
+              res.data.message.user_gender = "0";
+            } else {
+              res.data.message.user_gender = "1";
+            }
+            this.$store.dispatch("UserLogin", res.data.message);
+            this.$store.dispatch("UserName", res.data.message.user_name);
+            //跳转到首页
+            this.$router.push("/");
+          } else if (res.data.status == 11) {
+            this.$message.error(`错误提示：${res.data.message}`);
+          } else {
+            this.$message.error(
+              `异常情况请联系管理员！代码：${res.data.status}`
+            );
+          }
+        });
+    },
+    //token后台解析
+    /*  sendToken(val) {
       this.axios
         .get(
           "/api/DoExp/" +
@@ -108,7 +141,7 @@ export default {
             this.$message.error("异常情况，请联系管理员！");
           }
         });
-    },
+    }, */
     //更新手机号
     /* updateInfo() {
       this.$refs.userInfoAsync.validate((valid) => {

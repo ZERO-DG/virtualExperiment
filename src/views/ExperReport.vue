@@ -13,6 +13,7 @@
         style="margin:10px auto;display:block;"
         type="primary"
         @click="upReport"
+        :disabled="upState"
       >
         上传到ilab平台
       </el-button>
@@ -25,6 +26,7 @@ export default {
     return {
       pdfUrl: "", //pdfURL
       loading: true, //等待加载文档
+      upState: false, //上传按钮只能传一次，避免重复
     };
   },
   created() {
@@ -43,6 +45,18 @@ export default {
         .post("/api/REPORT/USEROPERATE/BackResult", data)
         .then((res) => {
           console.log(res);
+          if (res.data.status == 0) {
+            if (res.data.message == "true") {
+              this.upState = true;
+              this.$message.success("上传到ilab成功！");
+            } else if (res.data.message == "false") {
+              this.$message.error("上传ilab失败！");
+            } else {
+              this.$message.error(`上传有误，错误：${res}`);
+            }
+          } else {
+            this.$message.error(`其他错误，错误代码：${res.status}`);
+          }
         });
     },
     getReportPdf(val) {

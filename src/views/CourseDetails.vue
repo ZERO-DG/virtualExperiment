@@ -1,9 +1,16 @@
 <template>
   <div class="main-content">
+    <h1>{{ obj.experience_name }}</h1>
     <el-container>
-      <el-tabs class="side-list" :tab-position="tabPosition">
+      <el-tabs
+        class="side-list"
+        :tab-position="tabPosition"
+        @tab-click="clickTabs"
+      >
         <el-tab-pane>
-          <span slot="label"> <i class="el-icon-s-order"></i>申报书 </span>
+          <span slot="label" label="申报书">
+            <i class="el-icon-s-order"></i>申报书
+          </span>
           <iframe
             :src="obj.experience_notification"
             style="width: 1200px; height: 600px; border: none; margin: 10px"
@@ -13,6 +20,7 @@
           <span slot="label"> <i class="el-icon-video-play"></i>简介视频 </span>
           <video
             :src="obj.experience_intro_video"
+            ref="introductionVideo"
             controls="controls"
             class="video_style "
           ></video>
@@ -23,6 +31,7 @@
           </span>
           <video
             :src="obj.experience_lead_video"
+            ref="guideVideo"
             controls="controls"
             class="video_style "
           ></video>
@@ -55,7 +64,7 @@
           <span slot="label"> <i class="el-icon-reading"></i>操作手册 </span>
           <!-- {{ obj.experience_required }} -->
         </el-tab-pane>
-        <el-tab-pane label="实验评价">
+        <!-- <el-tab-pane label="实验评价">
           <span slot="label"> <i class="el-icon-s-comment"></i>实验评价 </span>
 
           <div>
@@ -85,7 +94,7 @@
               <p>(用户名)回复：？？？</p>
             </el-card>
           </div>
-        </el-tab-pane>
+        </el-tab-pane> -->
         <el-tab-pane label="实验统计">
           <span slot="label" @click="toMap(obj.experStatisEntity)">
             <i class="el-icon-s-marketing"></i>实验统计
@@ -96,7 +105,7 @@
             <i class="el-icon-s-marketing"></i>分数查看
           </span>
         </el-tab-pane>
-        <el-tab-pane v-show="identity" label="（老师）成绩">
+        <el-tab-pane v-if="identity" label="（老师）成绩">
           <span slot="label" @click="allScoreView">
             <i class="el-icon-s-marketing"></i>成绩汇总
           </span>
@@ -113,7 +122,7 @@ export default {
       obj: {}, //整个实验对象
       tabPosition: "left",
       textarea: "", //输入框
-      identity: false, //是否是老师，老师true，学生false
+      identity: false, //是否是老师，老师true 2，学生false 1
     };
   },
   created() {
@@ -128,14 +137,34 @@ export default {
           this.$route.query.experId //这个是课程ID
       )
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         // console.log(res.data.message.experience_notification);
         this.obj = res.data.message;
       });
   },
   components: {},
   methods: {
+    /**
+     * @method
+     *  切换tabs事件监听
+     *    参数
+     *      @param name 监听事件名字
+     *      @param action 事件行为监听
+     */
+    clickTabs(el) {
+      // console.log(el.label);
+      if (el.label !== "简介视频") {
+        // this.$refs.introductionVideo.play();
+        this.$refs.introductionVideo.pause();
+      }
+      if (el.label !== "引导视频") {
+        // this.$refs.guideVideo.play();
+        this.$refs.guideVideo.pause();
+      }
+    },
+    //检查是老师还是学生
     checkedIden() {
+      // console.log(this.$store.state.token.user_identity);
       if (this.$store.state.token.user_identity == 1) {
         return false;
       } else if (this.$store.state.token.user_identity == 2) {
@@ -147,7 +176,10 @@ export default {
       this.$router.push({
         path: "/allExperRecord",
         name: "allExperRecord", // 要跳转的路径的 name,可在 router 文件夹下的 index.js 文件内找
-        query: { expeId: this.obj.experience_id },
+        query: {
+          expeId: this.obj.experience_id,
+          experName: this.obj.experience_name,
+        },
       });
     },
     //跳转到分数查看页面
@@ -155,7 +187,10 @@ export default {
       this.$router.push({
         path: "/personExperRecord",
         name: "personExperRecord", // 要跳转的路径的 name,可在 router 文件夹下的 index.js 文件内找
-        query: { expeId: this.obj.experience_id },
+        query: {
+          expeId: this.obj.experience_id,
+          experName: this.obj.experience_name,
+        },
       });
     },
     //地图页跳转

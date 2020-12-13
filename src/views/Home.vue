@@ -1,9 +1,9 @@
 <template>
   <div>
     <!-- <div class="home_bg"></div> -->
-    <el-carousel class="horse_race" height="55rem">
+    <el-carousel class="horse_race" height="50vh">
       <el-carousel-item v-for="item in imgSrc" :key="item">
-        <el-image :src="item" style="width:100%;height:100%">
+        <el-image :src="item" style="width:100%;height:120%;top:-10vh;">
           <div slot="error" class="image-slot">
             <i class="el-icon-picture-outline"></i>
           </div>
@@ -127,7 +127,7 @@ export default {
 .horse_race {
   /* width: 1400px;
   min-width: 1200px; */
-  width: 100%;
+  width: 80%;
   margin: 0px auto 10px;
 }
 

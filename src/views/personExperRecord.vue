@@ -2,7 +2,7 @@
   <div class="main-content">
     <h1 v-show="exeDo">你还未做过实验</h1>
     <div v-show="!exeDo">
-      <h2>{{ userName }}</h2>
+      <h2>{{ userName }}-{{ experName }}</h2>
       <el-table
         :data="perExperList"
         stripe
@@ -37,6 +37,13 @@
             >
               查看
             </el-button>
+            <el-button
+              size="mini"
+              type="success"
+              @click="downLoadFile(scope.row.pdf_link)"
+            >
+              下载报告
+            </el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -50,15 +57,43 @@ export default {
       perExperList: [], //实验列表list
       exeDo: true, //提示消息
       userName: "", //用户姓名
+      experName: "", //实验名字
     };
   },
+  created() {
+    // console.log(this.$store.state.token.user_id);
+    // console.log(this.$route.query.expeId);
+    let uid = this.checkUid();
+    //如果带参数是老师查看，不带是个人查看
+    this.getPerRecord(uid, this.$route.query.expeId);
+    this.userName = this.$route.query.name;
+    this.experName = this.$route.query.experName;
+  },
+  mounted() {},
   methods: {
+    /**
+     * @method
+     *   下载之前生成pdf文件
+     *  @param fileUrl 文件Url
+     */
+    downLoadFile(fileUrl) {
+      // console.log(fileUrl);
+      if (!fileUrl || fileUrl === "") {
+        this.$message.info("没有文件可以下载！");
+        return;
+      }
+
+      window.open(fileUrl, "blank");
+    },
+    /**
+     * 跳转至分数详情页
+     */
     toScroeView(val) {
       //   console.log(val);
       this.$router.push({
         path: "/ScoreView",
         name: "ScoreView",
-        query: { ecid: val },
+        query: { ecid: val, experName: this.experName },
       });
     },
     // 查询个人的试验记录 /EXPERIENCES/USEROPERATE/getUserFinishExperienceList
@@ -99,15 +134,6 @@ export default {
       return this.$route.query.uid;
     },
   },
-  created() {
-    // console.log(this.$store.state.token.user_id);
-    // console.log(this.$route.query.expeId);
-    let uid = this.checkUid();
-    //如果带参数是老师查看，不带是个人查看
-    this.getPerRecord(uid, this.$route.query.expeId);
-    this.userName = this.$route.query.name;
-  },
-  mounted() {},
 };
 </script>
 <style scoped>

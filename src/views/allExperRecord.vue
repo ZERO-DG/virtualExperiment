@@ -1,5 +1,6 @@
 <template>
   <div class="main-content">
+    <h1>{{ experName }}</h1>
     <el-table
       :data="scoreList"
       stripe
@@ -40,8 +41,14 @@ export default {
   data() {
     return {
       scoreList: [], //所有实验的记录
+      experName: "", //实验名字
     };
   },
+  created() {
+    this.getAllScore(this.$route.query.expeId);
+    this.experName = this.$route.query.experName;
+  },
+  mounted() {},
   methods: {
     //跳转到分数查看页面
     toScroeView(row) {
@@ -52,6 +59,7 @@ export default {
           expeId: this.$route.query.expeId,
           uid: row.uid,
           name: row.uName,
+          experName: this.experName,
         },
       });
     },
@@ -122,10 +130,6 @@ export default {
       return Y + M + D + h + m + s;
     },
   },
-  created() {
-    this.getAllScore(this.$route.query.expeId);
-  },
-  mounted() {},
 };
 </script>
 <style scoped></style>

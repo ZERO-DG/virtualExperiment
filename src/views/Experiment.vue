@@ -30,9 +30,9 @@ export default {
     };
   },
   created() {
-    console.log(window.atob(this.$route.query.lab));
+    // console.log(window.atob(this.$route.query.lab));
     // this.webLabUrl = window.atob(this.$route.query.lab);
-    console.log(this.$store.state.token.user_id);
+    // console.log(this.$store.state.token.user_id);
     //开始实验
     this.getExperRcord(
       this.$store.state.token.user_id, //用户id
@@ -49,7 +49,10 @@ export default {
     window.addEventListener("message", (event) => {
       //箭头上下文，
       if (event.data === "getUserInfo") {
-        let data = { eid: this.eid };
+        let data = {
+          eid: this.eid,
+          username: this.$store.state.token.user_ilabId,
+        };
         childNode.postMessage(data, "*");
       }
       //实验结束
@@ -71,8 +74,8 @@ export default {
   methods: {
     //说
     generateExperimentReport() {
-      console.log("生成实验报告，跳转到查看页面并选择是否上传；");
-      console.log(this.eid);
+      /* console.log("生成实验报告，跳转到查看页面并选择是否上传；");
+      console.log(this.eid); */
 
       this.$router.push({
         path: "/ExperReport",

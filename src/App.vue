@@ -19,7 +19,7 @@
         >
           <el-menu-item index="/">首页</el-menu-item>
           <!-- <el-menu-item index="/CourseDetails">课程详情页</el-menu-item> -->
-          <el-menu-item index="/About">关于</el-menu-item>
+          <!-- <el-menu-item index="/About">关于</el-menu-item> -->
           <!-- 搜索框 -->
           <el-menu-item style="background: #545c64">
             <el-input
@@ -60,13 +60,16 @@
           >
             {{ userName }}
           </el-menu-item> -->
-          <el-menu-item
+          <el-menu-item v-show="loginState" style="float:right;">
+            {{ userName }}
+          </el-menu-item>
+          <!-- <el-menu-item
             index="/CollectionCourses"
             v-show="loginState"
             style="float:right;"
           >
             收藏课程
-          </el-menu-item>
+          </el-menu-item> -->
         </el-menu>
       </div>
 
@@ -131,7 +134,7 @@ export default {
       return this.$store.state.isLogin;
     },
     userName() {
-      return this.$store.state.username;
+      return this.$store.state.token ? this.$store.state.token.user_ilabId : "";
     },
     login() {
       return this.$store.state.loginBar;

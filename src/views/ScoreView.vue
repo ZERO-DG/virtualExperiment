@@ -1,5 +1,6 @@
 <template>
   <div class="main-content">
+    <h1>{{ experName }}</h1>
     <h1 v-show="expeCom">没有完成实验，无法获取成绩单！</h1>
     <div v-show="!expeCom">
       <h2>
@@ -49,7 +50,14 @@ export default {
       topicList: [], //步骤对象实体
       expeCom: true, //是否完成了实验，有步骤成绩
       experScore: "", //实验成绩
+      experName: "", //实验名字
     };
+  },
+  created() {
+    this.getStepScore(this.$route.query.ecid);
+  },
+  mounted() {
+    this.experName = this.$route.query.experName;
   },
   methods: {
     // 时间戳转换成时间
@@ -89,10 +97,6 @@ export default {
         });
     },
   },
-  created() {
-    this.getStepScore(this.$route.query.ecid);
-  },
-  mounted() {},
 };
 </script>
 <style scoped></style>
