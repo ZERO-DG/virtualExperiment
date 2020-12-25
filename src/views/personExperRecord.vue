@@ -1,8 +1,10 @@
 <template>
   <div class="main-content">
-    <h1 v-show="exeDo">你还未做过实验</h1>
+    <el-page-header class="title" @back="goBack" v-bind:content="userName == null ? experName:userName + '-' + experName">
+    </el-page-header>
+    <!-- <h1 v-show="exeDo">你还未做过实验</h1> -->
     <div v-show="!exeDo">
-      <h2>{{ userName }}-{{ experName }}</h2>
+      <!-- <h2 >{{ userName }}    {{ experName }}</h2> -->
       <el-table
         :data="perExperList"
         stripe
@@ -132,6 +134,10 @@ export default {
         return this.$store.state.token.user_id;
       }
       return this.$route.query.uid;
+    },
+     //返回上一级
+    goBack() {
+      history.go(-1);
     },
   },
 };

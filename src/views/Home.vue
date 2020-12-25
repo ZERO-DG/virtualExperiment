@@ -60,7 +60,7 @@ export default {
   methods: {
     //获得页数的列表信息
     getList(page) {
-      // console.log(this.apiUrl);
+      // console.log(page);
       this.axios
         .get("/api/EXPERIENCES/GetExperienceList/" + page)
         .then((res) => {

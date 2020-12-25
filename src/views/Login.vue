@@ -1,7 +1,7 @@
 <template>
   <div class="main-content">
     <el-container style="margin-top: 100px">
-      <h1 style="color:white;">请从ilab实验平台跳转过来访问</h1>
+      <h1 style="color:white;">请从ilab-x实验平台跳转过来访问</h1>
       <!-- <el-aside width="350px"> </el-aside>
       <el-main>
         <el-tabs v-model="activeName" class="main_login">

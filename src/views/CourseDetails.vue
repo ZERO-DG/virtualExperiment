@@ -25,7 +25,7 @@
             class="video_style "
           ></video>
         </el-tab-pane>
-        <el-tab-pane label="引导视频">
+        <!-- <el-tab-pane label="引导视频">
           <span slot="label">
             <i class="el-icon-video-camera"></i>引导视频
           </span>
@@ -35,21 +35,16 @@
             controls="controls"
             class="video_style "
           ></video>
-        </el-tab-pane>
+        </el-tab-pane> -->
         <el-tab-pane label="实验简介">
           <span slot="label"> <i class="el-icon-s-order"></i>实验简介 </span>
           <!-- 实验简介 experience_introduction -->
           <p v-html="obj.experience_introduction" style="margin-left: 10px"></p>
         </el-tab-pane>
-        <el-tab-pane label="开始实验">
-          <span slot="label" @click="experimentalize()">
-            <i class="el-icon-s-platform"></i>开始实验
-          </span>
-        </el-tab-pane>
-        <el-tab-pane label="实验要求">
-          <span slot="label"> <i class="el-icon-s-claim"></i>实验要求 </span>
+        <el-tab-pane label="实验指导">
+          <span slot="label"> <i class="el-icon-s-claim"></i>实验指导 </span>
           <!-- experience_required  -->
-          <el-link
+          <!-- <el-link
             :href="obj.experience_required"
             type="primary"
             :underline="false"
@@ -58,11 +53,24 @@
             style="margin: 10px;font-size:20px;"
           >
             下载实验要求
-          </el-link>
+          </el-link> -->
+          <iframe
+            :src="obj.experience_required"
+            style="width: 1200px; height: 600px; border: none; margin: 10px"
+          ></iframe>
         </el-tab-pane>
         <el-tab-pane label="操作手册">
           <span slot="label"> <i class="el-icon-reading"></i>操作手册 </span>
           <!-- {{ obj.experience_required }} -->
+          <iframe
+            :src="obj.experience_instruction"
+            style="width: 1200px; height: 600px; border: none; margin: 10px"
+          ></iframe>
+        </el-tab-pane>
+        <el-tab-pane label="开始实验">
+          <span slot="label" @click="experimentalize()">
+            <i class="el-icon-s-platform"></i>开始实验
+          </span>
         </el-tab-pane>
         <!-- <el-tab-pane label="实验评价">
           <span slot="label"> <i class="el-icon-s-comment"></i>实验评价 </span>
@@ -95,11 +103,6 @@
             </el-card>
           </div>
         </el-tab-pane> -->
-        <el-tab-pane label="实验统计">
-          <span slot="label" @click="toMap(obj.experStatisEntity)">
-            <i class="el-icon-s-marketing"></i>实验统计
-          </span>
-        </el-tab-pane>
         <el-tab-pane label="分数查看">
           <span slot="label" @click="scoreView">
             <i class="el-icon-s-marketing"></i>分数查看
@@ -109,6 +112,19 @@
           <span slot="label" @click="allScoreView">
             <i class="el-icon-s-marketing"></i>成绩汇总
           </span>
+        </el-tab-pane>
+        <el-tab-pane label="实验统计">
+          <span slot="label" @click="toMap(obj.experStatisEntity)">
+            <i class="el-icon-s-marketing"></i>实验统计
+          </span>
+        </el-tab-pane>
+        <el-tab-pane label="参考资料">
+          <span slot="label"> <i class="el-icon-reading"></i>参考资料 </span>
+          <!-- {{ obj.experience_required }} -->
+          <iframe
+            :src="obj.experience_reference"
+            style="width: 1200px; height: 600px; border: none; margin: 10px"
+          ></iframe>
         </el-tab-pane>
       </el-tabs>
     </el-container>
@@ -129,7 +145,7 @@ export default {
     this.identity = this.checkedIden();
   },
   mounted() {
-    // console.log(this.$route.query.experId);
+    console.log(this.$route.query.experId);
     //接收一个课程id
     this.axios
       .get(
@@ -198,7 +214,7 @@ export default {
       this.$router.push({
         path: "",
         name: "VistMap", // 要跳转的路径的 name,可在 router 文件夹下的 index.js 文件内找
-        query: { mapData: val },
+        query: { mapData: val, experName: this.obj.experience_name },
       });
     },
     //进入虚拟实验页面
@@ -210,6 +226,7 @@ export default {
         name: "Experiment",
         query: {
           experience: exeId,
+          experName: this.obj.experience_name,
           lab: window.btoa(this.obj.experience_lab),
         },
       });

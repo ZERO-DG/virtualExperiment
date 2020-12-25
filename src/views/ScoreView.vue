@@ -1,7 +1,9 @@
 <template>
   <div class="main-content">
-    <h1>{{ experName }}</h1>
-    <h1 v-show="expeCom">没有完成实验，无法获取成绩单！</h1>
+    <el-page-header class="title" @back="goBack" v-bind:content="userName == null ? experName:userName + '-' + experName">
+    </el-page-header>
+    <!-- <h1>{{ experName }}</h1> -->
+    <!-- <h1 v-show="expeCom">没有完成实验，无法获取成绩单！</h1> -->
     <div v-show="!expeCom">
       <h2>
         实验总成绩：<font style="color:red;">{{ experScore }} </font>分
@@ -95,6 +97,10 @@ export default {
             this.$message.error("未知错误！");
           }
         });
+    },
+    //返回上一级
+    goBack() {
+      history.go(-1);
     },
   },
 };

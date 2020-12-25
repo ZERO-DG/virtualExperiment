@@ -1,6 +1,6 @@
 <template>
   <div class="main-content">
-    <h1>token后台解析</h1>
+    <h1>欢迎ilab-x用户</h1>
     <!-- <el-form
       v-show="updateState"
       :model="userInfoAsync"
@@ -165,7 +165,7 @@ export default {
 
           if (res.data.status == 0) {
             this.$message.success(
-              "您是本地用户，已完成ilab对接更新了用户信息。"
+              "您是本地用户，已完成ilab-x对接更新了用户信息。"
             );
             //登录信息修改
             if (res.data.message.user_gender == "male") {
@@ -199,7 +199,7 @@ export default {
             this.$message.error("插入新用户失败，请联系管理员！");
           } else if (res.data.status == 7) {
             this.$message.success(
-              "更新成功，已存在ilabid，不存在手机号，默认密码6个0（000000）！"
+              "更新成功，已存在ilab-x帐号，不存在手机号，默认密码6个0（000000）！"
             );
             //登录信息修改
             if (res.data.message.user_gender == "male") {

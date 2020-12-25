@@ -13,7 +13,8 @@ module.exports = {
         proxy: {
             '/api': {
                 // target: `http://192.168.1.101:8081`,
-                target: `http://192.168.31.129:3748`,
+                // target: `http://192.168.31.129:3748`,
+                target: `http://127.0.0.1:3748`,
                 // target: `http://47.93.14.153:3748/virtualhandler`,
                 // 在本地会创建一个虚拟服务端，然后发送请求的数据，并同时接收请求的数据，这样服务端和服务端进行数据的交互就不会有跨域问题
                 changeOrigin: true,

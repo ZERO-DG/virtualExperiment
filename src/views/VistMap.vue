@@ -1,6 +1,6 @@
 <template>
   <div class="main-content">
-    <el-page-header class="title" @back="goBack" content="访问记录">
+    <el-page-header class="title" @back="goBack" v-bind:content="experName + '访问记录'">
     </el-page-header>
     <div :style="{ height: '666px', width: '100%' }" id="ChinaMap"></div>
   </div>
@@ -13,6 +13,7 @@ export default {
   data() {
     return {
       visitMapData: [], //地域访问次数
+      experName: "", //实验名字
     };
   },
   methods: {
@@ -86,6 +87,7 @@ export default {
   },
   mounted() {
     // console.log(this.$route.query.id);
+    this.experName = this.$route.query.experName;
     const vistData = this.$route.query.mapData;
     for (let key in vistData) {
       if (key == "statistics_aomen") {

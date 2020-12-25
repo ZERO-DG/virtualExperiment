@@ -134,7 +134,7 @@ export default {
       return this.$store.state.isLogin;
     },
     userName() {
-      return this.$store.state.token ? this.$store.state.token.user_ilabId : "";
+      return this.$store.state.token ? this.$store.state.token.user_name : "";
     },
     login() {
       return this.$store.state.loginBar;

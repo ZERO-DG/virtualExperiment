@@ -1,6 +1,8 @@
 <template>
   <div class="main-content">
-    <h1>{{ experName }}</h1>
+    <el-page-header class="title" @back="goBack" v-bind:content="experName">
+    </el-page-header>
+    <!-- <h1>{{ experName }}</h1> -->
     <el-table
       :data="scoreList"
       stripe
@@ -128,6 +130,10 @@ export default {
       var m = date.getMinutes() + ":";
       var s = date.getSeconds();
       return Y + M + D + h + m + s;
+    },
+    //返回上一级
+    goBack() {
+      history.go(-1);
     },
   },
 };

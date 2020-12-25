@@ -1,5 +1,6 @@
 <template>
   <div class="main-content">
+    <h2>{{experName}}</h2>
     <iframe
       id="childFrame"
       frameborder="0"
@@ -27,6 +28,7 @@ export default {
       webLabUrl: "", //webGL实验url地址
       eid: "", //发给webGL的实验记录id
       experOverBtn: false, //实验结束后置位true，可以生成报告跳转查看报告
+      experName: "", //实验名字
     };
   },
   created() {
@@ -43,6 +45,7 @@ export default {
     this.getUserIP(this.$route.query.experId);
   },
   mounted() {
+    this.experName = this.$route.query.experName;
     //获取到iframe子窗口对象
     let childNode = document.getElementById("childFrame").contentWindow;
     //监听子窗口的请求
@@ -52,6 +55,7 @@ export default {
         let data = {
           eid: this.eid,
           username: this.$store.state.token.user_ilabId,
+          usernickname: this.$store.state.token.user_name,
         };
         childNode.postMessage(data, "*");
       }
@@ -60,14 +64,14 @@ export default {
         //显示按钮
         this.experOverBtn = true;
         //消息提示
-        this.$alert(
-          "<font style='color:red;'>点击下方按钮生成实验报告！</font>",
-          "实验结束",
-          {
-            confirmButtonText: "确定",
-            dangerouslyUseHTMLString: true,
-          }
-        );
+        // this.$alert(
+        //   "<font style='color:red;'>点击下方按钮生成实验报告！</font>",
+        //   "实验结束",
+        //   {
+        //     confirmButtonText: "确定",
+        //     dangerouslyUseHTMLString: true,
+        //   }
+        // );
       }
     });
   },
@@ -80,7 +84,11 @@ export default {
       this.$router.push({
         path: "/ExperReport",
         name: "ExperReport",
-        query: { recordId: this.eid, experId: this.$route.query.experience },
+        query: {
+           recordId: this.eid,
+           experName: this.$route.query.experName,
+           experId: this.$route.query.experience
+           },
       });
     },
     //获取开始实验，告知后端开始实验，返回一条开始实验的id，变为同步请求
@@ -115,26 +123,6 @@ export default {
           console.log(
             "%c" +
               [
-                "                   _ooOoo_",
-                "                  o8888888o",
-                '                  88" . "88',
-                "                  (| -_- |)",
-                "                  O\\  =  /O",
-                "               ____/`---'\\____",
-                "             .'  \\\\|     |//  `.",
-                "            /  \\\\|||  :  |||//  \\",
-                "           /  _||||| -:- |||||-  \\",
-                "           |   | \\\\\\  -  /// |   |",
-                "           | \\_|  ''\\---/''  |   |",
-                "           \\  .-\\__  `-`  ___/-. /",
-                "         ___`. .'  /--.--\\  `. . __",
-                '      ."" \'<  `.___\\_<|>_/___.\'  >\'"".',
-                "     | | :  `- \\`.;`\\ _ /`;.`/ - ` : | |",
-                "     \\  \\ `-.   \\_ __\\ /__ _/   .-` /  /",
-                "======`-.____`-.___\\_____/___.-`____.-'======",
-                "                   `=---='",
-                "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
-                "         佛祖保佑       永无BUG",
               ].join("\n") +
               "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n%c  您的访问地址为：%c" +
               str,
