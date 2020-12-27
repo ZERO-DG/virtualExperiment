@@ -8,7 +8,7 @@
         @tab-click="clickTabs"
       >
         <el-tab-pane>
-          <span slot="label" label="申报书">
+          <span slot="label" label="申报书" style="font-size:20px">
             <i class="el-icon-s-order"></i>申报书
           </span>
           <iframe
@@ -17,7 +17,7 @@
           ></iframe>
         </el-tab-pane>
         <el-tab-pane label="简介视频">
-          <span slot="label"> <i class="el-icon-video-play"></i>简介视频 </span>
+          <span slot="label" style="font-size:20px"> <i class="el-icon-video-play"></i>简介视频 </span>
           <video
             :src="obj.experience_intro_video"
             ref="introductionVideo"
@@ -37,12 +37,12 @@
           ></video>
         </el-tab-pane> -->
         <el-tab-pane label="实验简介">
-          <span slot="label"> <i class="el-icon-s-order"></i>实验简介 </span>
+          <span slot="label" style="font-size:20px"> <i class="el-icon-s-order"></i>实验简介 </span>
           <!-- 实验简介 experience_introduction -->
           <p v-html="obj.experience_introduction" style="margin-left: 10px"></p>
         </el-tab-pane>
         <el-tab-pane label="实验指导">
-          <span slot="label"> <i class="el-icon-s-claim"></i>实验指导 </span>
+          <span slot="label" style="font-size:20px"> <i class="el-icon-s-claim"></i>实验指导 </span>
           <!-- experience_required  -->
           <!-- <el-link
             :href="obj.experience_required"
@@ -60,7 +60,7 @@
           ></iframe>
         </el-tab-pane>
         <el-tab-pane label="操作手册">
-          <span slot="label"> <i class="el-icon-reading"></i>操作手册 </span>
+          <span slot="label" style="font-size:20px"> <i class="el-icon-reading"></i>操作手册 </span>
           <!-- {{ obj.experience_required }} -->
           <iframe
             :src="obj.experience_instruction"
@@ -68,7 +68,7 @@
           ></iframe>
         </el-tab-pane>
         <el-tab-pane label="开始实验">
-          <span slot="label" @click="experimentalize()">
+          <span slot="label" style="font-size:20px" @click="experimentalize()">
             <i class="el-icon-s-platform"></i>开始实验
           </span>
         </el-tab-pane>
@@ -104,22 +104,22 @@
           </div>
         </el-tab-pane> -->
         <el-tab-pane label="分数查看">
-          <span slot="label" @click="scoreView">
+          <span slot="label" style="font-size:20px" @click="scoreView">
             <i class="el-icon-s-marketing"></i>分数查看
           </span>
         </el-tab-pane>
         <el-tab-pane v-if="identity" label="（老师）成绩">
-          <span slot="label" @click="allScoreView">
+          <span slot="label" style="font-size:20px" @click="allScoreView">
             <i class="el-icon-s-marketing"></i>成绩汇总
           </span>
         </el-tab-pane>
         <el-tab-pane label="实验统计">
-          <span slot="label" @click="toMap(obj.experStatisEntity)">
+          <span slot="label" style="font-size:20px" @click="toMap(obj.experStatisEntity)">
             <i class="el-icon-s-marketing"></i>实验统计
           </span>
         </el-tab-pane>
         <el-tab-pane label="参考资料">
-          <span slot="label"> <i class="el-icon-reading"></i>参考资料 </span>
+          <span slot="label" style="font-size:20px"> <i class="el-icon-reading"></i>参考资料 </span>
           <!-- {{ obj.experience_required }} -->
           <iframe
             :src="obj.experience_reference"

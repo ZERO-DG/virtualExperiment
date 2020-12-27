@@ -1,7 +1,12 @@
 <template>
-  <div class="main-content">
-    <h2>{{experName}}</h2>
+  <div class="main-content"
+    v-loading="loading"
+    element-loading-text="拼命加载中"
+    element-loading-spinner="el-icon-loading"
+    element-loading-background="rgba(0, 0, 0, 0.8)">
+    <h4>{{experName}}</h4>
     <iframe
+      ref="stfIframe"
       id="childFrame"
       frameborder="0"
       width="1200"
@@ -29,6 +34,7 @@ export default {
       eid: "", //发给webGL的实验记录id
       experOverBtn: false, //实验结束后置位true，可以生成报告跳转查看报告
       experName: "", //实验名字
+      loading: true,
     };
   },
   created() {
@@ -42,12 +48,26 @@ export default {
     );
 
     // 获取ip统计做实验的人数及其所在地
-    this.getUserIP(this.$route.query.experId);
+    this.getUserIP(this.$route.query.experience);
   },
   mounted() {
+    const iframe = this.$refs.stfIframe;
     this.experName = this.$route.query.experName;
     //获取到iframe子窗口对象
     let childNode = document.getElementById("childFrame").contentWindow;
+     // IE和非IE浏览器，监听iframe加载事件不一样，需要兼容
+    const that = this;
+    if (iframe.attachEvent) {
+      // IE
+      iframe.attachEvent('onload', () => {
+        that.stateChange();
+      });
+    } else {
+      // 非IE
+      iframe.onload = function () {
+        that.stateChange();
+      };
+    }
     //监听子窗口的请求
     window.addEventListener("message", (event) => {
       //箭头上下文，
@@ -76,6 +96,9 @@ export default {
     });
   },
   methods: {
+    stateChange() {
+      this.loading = false;
+    },
     //说
     generateExperimentReport() {
       /* console.log("生成实验报告，跳转到查看页面并选择是否上传；");
