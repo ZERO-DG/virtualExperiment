@@ -27,6 +27,28 @@
             </el-card>
           </div>
         </el-col>
+        <el-col :span="6">
+          <div @click="ToWebsite('http://stte.csu.owvlab.net/vlab/gzzd.html?from=groupmessage&isappinstalled=0')">
+          <el-card shadow="hover" class="card" body-style="padding:0px">
+                <div class="img_border">
+                  <img :src= "dianliqianyinSrc" class="image" />
+                </div>
+                <h3 class="text_over">列车电力牵引传动与故障诊断虚拟仿真实验</h3>
+                <p class="text_over" style="color:gray;">中南大学</p>
+              </el-card>
+          </div>
+        </el-col>
+        <el-col :span="6">
+          <div @click="ToWebsite('http://vtransport.csu.edu.cn/')">
+          <el-card shadow="hover" class="card" body-style="padding:0px">
+                <div class="img_border">
+                  <img :src= "guidaojiaotongSrc" class="image" />
+                </div>
+                <h3 class="text_over">城市轨道交通车站大客流管控虚拟仿真实验</h3>
+                <p class="text_over" style="color:gray;">中南大学</p>
+              </el-card>
+          </div>
+        </el-col>
       </el-row>
     </div>
   </div>
@@ -49,6 +71,8 @@ export default {
         require("../assets/p7.jpg"),
         require("../assets/p8.jpg"),
       ], //侧边图
+      dianliqianyinSrc: require('../assets/dianliqianyin.jpg'),
+      guidaojiaotongSrc: require('../assets/guidaojiaotong.png'),
       experList: [], //实验列表集合{ experience_name: "", experience_collegeName: "" }
     };
   },
@@ -74,6 +98,11 @@ export default {
         name: "CourseDetails",
         query: { experId: experId },
       });
+    },
+    // 跳转到外部网站
+    ToWebsite (e) {
+      window.open(e,'_blank')
+      // window.location.href = e;   //获取传入的数据，若传入的数据时正确的网址，就可以调到外部网站
     },
   },
 };
